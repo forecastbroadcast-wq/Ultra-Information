@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Library | Study Guides & Ebooks</title>
+  <meta name="description" content="Download study guides, ebooks and digital resources.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="navbar">
+  <a class="logo" href="#">DIGITAL<span>LIBRARY</span></a>
+  <nav>
+    <a href="#books">Books</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">DIGITAL BOOKSTORE</p>
+    <h1>Knowledge.<br><span>At Your Fingertips.</span></h1>
+    <p class="hero-text">Discover practical study guides and digital books you can purchase and download instantly.</p>
+    <a class="primary-btn" href="#books">Explore Books</a>
+  </div>
+</section>
+
+<main id="books" class="container">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">OUR COLLECTION</p>
+      <h2>Featured Books</h2>
+    </div>
+  </div>
+
+  <div class="book-grid">
+    <article class="book-card">
+      <div class="book-cover ai-cover">
+        <div class="cover-small">A STUDY GUIDE</div>
+        <div class="cover-title">THE<br>AI<br>FUTURE</div>
+        <div class="cover-subtitle">Understanding Artificial Intelligence, Its Risks & Its Future</div>
+      </div>
+      <div class="book-info">
+        <p class="category">TECHNOLOGY</p>
+        <h3>The AI Future</h3>
+        <p>30-Page Study Guide</p>
+        <div class="book-bottom">
+          <strong>KSh 100</strong>
+          <button class="buy-btn" onclick="openPayment('The AI Future', 100)">Buy & Download</button>
+        </div>
+      </div>
+    </article>
+
+    <div class="coming-card">
+      <div class="plus">+</div>
+      <h3>More books coming soon</h3>
+      <p>Your future digital library starts here.</p>
+    </div>
+  </div>
+</main>
+
+<section id="about" class="about">
+  <div class="container">
+    <p class="eyebrow">ABOUT</p>
+    <h2>A simple place for useful digital books.</h2>
+    <p>Purchase a book securely and receive access to your digital download after payment confirmation.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="logo">DIGITAL<span>LIBRARY</span></div>
+    <p>© 2026 Digital Library. All rights reserved.</p>
+  </div>
+</footer>
+
+<div id="paymentModal" class="modal hidden">
+  <div class="modal-box">
+    <button class="close" onclick="closePayment()">×</button>
+    <p class="eyebrow">CHECKOUT</p>
+    <h2 id="paymentTitle">Purchase</h2>
+    <p id="paymentPrice"></p>
+    <label>Name</label>
+    <input id="customerName" type="text" placeholder="Your name">
+    <label>Email</label>
+    <input id="customerEmail" type="email" placeholder="you@example.com">
+    <button class="primary-btn full" onclick="startPaystack()">Continue to Payment</button>
+    <small>Payment will be processed securely by Paystack.</small>
+  </div>
+</div>
+
+<script src="https://js.paystack.co/v2/inline.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
