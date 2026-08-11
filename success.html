@@ -1,8 +1,213 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Payment Received</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="container" style="padding-top:100px;text-align:center">
-<p class="eyebrow">PAYMENT</p><h1>Thank you!</h1>
-<p style="margin:15px auto;max-width:600px;color:#667085">Your payment was received. Your download access will appear here after the payment has been securely verified.</p>
-<div style="margin-top:30px"><a class="primary-btn" href="index.html">Back to Store</a></div>
-</main></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            color: #111827;
+        }
+
+        p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        #status {
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .download-btn {
+            display: none;
+            text-decoration: none;
+            background: #16a34a;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .download-btn:hover {
+            background: #15803d;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="icon">⏳</div>
+
+    <h1>Checking Payment</h1>
+
+    <p id="message">
+        Please wait while we verify your Paystack payment...
+    </p>
+
+    <div id="status"></div>
+
+    <a
+        id="downloadButton"
+        class="download-btn"
+        href="#"
+    >
+        📥 Download Your Book
+    </a>
+
+    <br>
+
+    <a
+        class="back-btn"
+        href="index.html"
+    >
+        ← Back to Digital Library
+    </a>
+
+</div>
+
+<script>
+
+async function verifyPayment() {
+
+    const params = new URLSearchParams(window.location.search);
+
+    const reference = params.get("reference");
+
+    const message = document.getElementById("message");
+    const status = document.getElementById("status");
+    const downloadButton = document.getElementById("downloadButton");
+
+    if (!reference) {
+
+        message.textContent =
+            "No payment reference was found.";
+
+        status.textContent =
+            "Payment could not be verified.";
+
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "/api/verify-payment",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    reference: reference
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            document.querySelector(".icon").textContent = "✅";
+
+            document.querySelector("h1").textContent =
+                "Payment Successful!";
+
+            message.textContent =
+                "Your payment has been verified successfully.";
+
+            status.textContent =
+                "Your book is ready.";
+
+            /*
+             * TEMPORARY:
+             * We will replace this with the secure
+             * download system in the next step.
+             */
+
+            downloadButton.style.display = "inline-block";
+
+            downloadButton.href =
+                "books/the-ai-future.pdf";
+
+        } else {
+
+            document.querySelector(".icon").textContent = "❌";
+
+            document.querySelector("h1").textContent =
+                "Payment Not Verified";
+
+            message.textContent =
+                result.message ||
+                "We could not verify your payment.";
+
+            status.textContent =
+                "Please contact support if money was deducted.";
+        }
+
+    } catch (error) {
+
+        document.querySelector(".icon").textContent = "⚠️";
+
+        document.querySelector("h1").textContent =
+            "Verification Error";
+
+        message.textContent =
+            "We could not connect to the payment verification server.";
+
+        status.textContent =
+            "Please try again later.";
+    }
+}
+
+verifyPayment();
+
+</script>
+
+</body>
+</html>
