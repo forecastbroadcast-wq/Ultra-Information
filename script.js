@@ -2,7 +2,7 @@ let selectedBook = "";
 let selectedAmount = 0;
 
 // Replace this with your Paystack PUBLIC KEY before going live.
-const PAYSTACK_PUBLIC_KEY = "pk_test_REPLACE_WITH_YOUR_PUBLIC_KEY";
+const PAYSTACK_PUBLIC_KEY = "pk_live_952e2367041f2dcf97bc43be4f29de307bf1abad";
 
 function openPayment(book, amount){
   selectedBook = book;
