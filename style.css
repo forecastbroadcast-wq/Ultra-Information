@@ -263,7 +263,7 @@ nav a:hover {
 
 
 /* =========================
-   BOOK COVER
+   NORMAL BOOK COVER
 ========================= */
 
 .book-cover {
@@ -282,35 +282,40 @@ nav a:hover {
 
 
 /* =========================
-   PORTRAIT BOOK COVER
+   PORTRAIT PRODUCT COVER
+   9:16 IMAGE
 ========================= */
 
-.portrait-cover {
-  height: 500px;
+.book-cover.portrait-cover {
+  height: auto;
+
+  min-height: 0;
 
   padding: 0;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
+  display: block;
 
   background: #f7f8fb;
 
   overflow: hidden;
+
+  line-height: 0;
 }
 
-.portrait-cover img {
+.book-cover.portrait-cover img {
+  display: block;
+
   width: 100%;
 
-  height: 100%;
+  height: auto;
 
-  display: block;
+  max-width: 100%;
 
   object-fit: contain;
 
   object-position: center;
+
+  margin: 0;
 }
 
 
@@ -550,24 +555,32 @@ footer {
      PORTRAIT COVER ON MOBILE
   ========================= */
 
-  .portrait-cover {
+  .book-cover.portrait-cover {
     height: auto;
 
-    min-height: 420px;
+    min-height: 0;
 
-    padding: 15px;
+    padding: 0;
+
+    display: block;
+
+    overflow: hidden;
+
+    line-height: 0;
   }
 
-  .portrait-cover img {
+  .book-cover.portrait-cover img {
     width: 100%;
 
     height: auto;
 
-    max-height: 600px;
+    max-width: 100%;
 
     object-fit: contain;
 
     object-position: center;
+
+    display: block;
   }
 
 
