@@ -1,3 +1,4 @@
+```css
 * {
   box-sizing: border-box;
   margin: 0;
@@ -282,11 +283,14 @@ nav a:hover {
 
 
 /* =========================
-   PORTRAIT PRODUCT COVER
-   9:16 IMAGE
+   FLEXIBLE PRODUCT COVER
+   IMAGE KEEPS ORIGINAL
+   ASPECT RATIO
 ========================= */
 
 .book-cover.portrait-cover {
+  width: 100%;
+
   height: auto;
 
   min-height: 0;
@@ -552,10 +556,13 @@ footer {
 
 
   /* =========================
-     PORTRAIT COVER ON MOBILE
+     FLEXIBLE PORTRAIT COVER
+     ON MOBILE
   ========================= */
 
   .book-cover.portrait-cover {
+    width: 100%;
+
     height: auto;
 
     min-height: 0;
@@ -605,3 +612,4 @@ footer {
   }
 
 }
+```
